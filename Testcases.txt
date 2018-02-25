@@ -1,0 +1,15 @@
+(define a 10)
+(define b 12)
+(define square (lambda (s) (* s s)))
+(define sqrt (lambda (s) (expt s 0.5)))
+(square a)
+(sqrt b)
+
+(define dist (lambda (p1 p2) (sqrt (+ (square (- (car p1) (car p2))) (square (- (car (cdr p1)) (car (cdr p2))))))))
+(define p1 (list 3 4))
+(define p2 (list 1 0))
+(dist p1 p2)
+
+(define fact (lambda (f) (if (< f 2) 1 (* f (fact (- f 1))))))
+(fact 4)
+
