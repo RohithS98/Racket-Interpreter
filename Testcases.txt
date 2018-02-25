@@ -13,3 +13,14 @@
 (define fact (lambda (f) (if (< f 2) 1 (* f (fact (- f 1))))))
 (fact 4)
 
+(define a 10)
+(define b 12)
+(cond [(< a b) "a < b"] [else "No"])
+(cond [(> a b) "Not True"] [(= a b) "Also not true"] [(equal? (+ a 2) b) "True!"])
+
+(define l1 (list 8 12 3 9 60 34 22 99))
+(cons 2 l1)
+(take l1 3)
+(drop l1 5)
+(define l2 (list 1 2 3 4))
+(append l1 l2)
