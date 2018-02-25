@@ -1,4 +1,4 @@
-Run parser.py
+Run interpreter.py
 
 Valid operations:
 1) Arithmetic operations:
