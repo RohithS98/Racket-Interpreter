@@ -24,3 +24,7 @@
 (drop l1 5)
 (define l2 (list 1 2 3 4))
 (append l1 l2)
+
+(define sum1 (lambda (s) (if (length s) (+ (car s) (sum1 (cdr s))) 0)))
+(define l3 (list 4 2 5 7 1))
+(sum1 l3)
