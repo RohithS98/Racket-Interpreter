@@ -22,7 +22,7 @@ class Environment():
             return self.outer.find(var)
 
 #This is the standard environment that contains the functions declared at global scope
-def std_env():
+def std_fn():
     #Standard procedures
     env = dict()
     env.update(vars(math))
@@ -35,7 +35,7 @@ def std_env():
     return env
 
 #Global scope Environment
-global1 = Environment((),(),None,std_env())
+global1 = Environment((),(),None,std_fn())
 
 #Procedures that are defined by the user are defined as objects
 class Procedure(object):
