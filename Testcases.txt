@@ -28,3 +28,10 @@
 (define sum1 (lambda (s) (if (length s) (+ (car s) (sum1 (cdr s))) 0)))
 (define l3 (list 4 2 5 7 1))
 (sum1 l3)
+
+(define (agcd l) (if (equal? (length l) 1) (car l) (gcd (car l) (agcd (cdr l)))))
+(define l1 (list 5 10 15))
+(agcd l1)
+(define l2 (list 9 3))
+(agcd l2)
+(agcd (append l2 (list 10)))
