@@ -9,6 +9,7 @@ Valid operations:
 	(expt 5 3) > 125
 	(abs -1) > 1
 	(modulo 10 3) > 1
+	(gcd 10 15) > 5
 
 2) Comparison: > , >=, = , < , <= , 'equal?'
 
@@ -32,4 +33,6 @@ Valid operations:
 6) Definition:
 	(define a 10)
 	(define square (lambda (s) (* s s)))
+	(define (square s) (* s s))
 	(square a) > 100
+	
