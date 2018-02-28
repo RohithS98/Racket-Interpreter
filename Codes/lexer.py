@@ -3,6 +3,50 @@
 #<Class name>.<Function name>(<param>)
 #Other functions can be called as <object>.<Function name>(<param>)
 
+class Parser():
+    def __init__(self):
+        pass
+
+    #Converts the list into a nested list, where sub-expressions are inside lists
+    def parse_list(self,lex):
+        if len(lex) == 0:
+            raise SyntaxError("Invalid Expression")
+        
+        token = lex.pop(0)
+        if token == '(':    #If the character is (, call function recursively till corresponding ) is found
+            temp = []
+            while lex[0] != ')':
+                temp.append(self.parse_list(lex))
+            lex.pop(0)      #Removes the )
+            return temp
+        
+        elif token == '[':  #Same as above but for [ instead of (
+            temp = []
+            while lex[0] != ']':
+                temp.append(self.parse_list(lex))
+            lex.pop(0)
+            return temp
+        
+        elif token==')' or token==']':      #Found ] or ) without corresponding [ or (
+            raise SyntaxError("Invalid Expression")
+        
+        else:
+            return Parser.typer(token)       #Otherwise convert to a int or float if possible
+
+    #Converts token into int float or string
+    @staticmethod
+    def typer(token):
+        try:
+            return int(token)
+        except ValueError:
+            try:
+                return float(token)
+            except:
+                return str(token)
+
+    def parse(self,temp):
+        return self.parse_list(temp)
+
 class Tokenizer:    #Class for tokenizer functions
     #String of delimiters
     delimiters="(){}[]"
@@ -15,39 +59,6 @@ class Tokenizer:    #Class for tokenizer functions
         for i in Tokenizer.delimiters:
             code1=code1.replace(i,' '+i+' ')
         return code1.split()    #Splits space-seperated string into list of words
-
-    #Converts the list into a nested list, where sub-expressions are inside lists
-    def make_tokens(self,lex):
-        if len(lex) == 0:
-            raise SyntaxError("Invalid Expression") 
-        token = lex.pop(0)
-        if token == '(':    #If the character is (, call function recursively till corresponding ) is found
-            temp = []
-            while lex[0] != ')':
-                temp.append(self.make_tokens(lex))
-            lex.pop(0)      #Removes the )
-            return temp
-        elif token == '[':  #Same as above but for [ instead of (
-            temp = []
-            while lex[0] != ']':
-                temp.append(self.make_tokens(lex))
-            lex.pop(0)
-            return temp
-        elif token==')' or token==']':      #Found ] or ) without corresponding [ or (
-            raise SyntaxError("Invalid Expression")
-        else:
-            return Tokenizer.typer(token)       #Otherwise convert to a int or float if possible
-
-    #Converts token into int float or string
-    @staticmethod
-    def typer(token):
-        try:
-            return int(token)
-        except ValueError:
-            try:
-                return float(token)
-            except:
-                return str(token)
 
     #Checks if a lexeme is a keyword
     @staticmethod
@@ -63,7 +74,7 @@ class Tokenizer:    #Class for tokenizer functions
             return True
         return False
 
-    #Joins strings which were separated. Not important right now
+    #Joins strings which were separated
     def check_token(self,x):
         if type(x)==list and x!=[]:
             i=0
@@ -107,8 +118,10 @@ class Tokenizer:    #Class for tokenizer functions
     @staticmethod
     def fulltokenize(x):
         tok = Tokenizer()
-        temp = tok.check_token(tok.make_tokens(tok.tokenize(x)))
+        temp = tok.check_token(tok.tokenize(x))
         del tok
+        par = Parser()
+        temp = par.parse(temp)
         return temp
 
 '''

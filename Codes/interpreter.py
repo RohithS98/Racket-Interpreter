@@ -27,7 +27,7 @@ def std_env():
     env = dict()
     env.update(vars(math))
     env.update({
-        '+':op.add, '-':op.sub, '*':op.mul, '/':op.truediv, '>':op.gt, '<':op.lt, '>=':op.ge, '<=':op.le, '=':op.eq,
+        '+':op.add, 'modulo':op.mod, '%':op.mod, '-':op.sub, '*':op.mul, '/':op.truediv, '>':op.gt, '<':op.lt, '>=':op.ge, '<=':op.le, '=':op.eq,
         'abs': abs, 'append' : op.add, 'car': lambda x : x[0], 'cdr': lambda x : x[1:], 'equal?': op.eq,
         'length': len, 'null?': lambda x : x==[], 'cons': lambda x,y : [x]+y, 'map': map, 'expt': pow,
         'list': lambda *x: list(x), 'drop': lambda x,y : x[y:], 'take': lambda x,y : x[:y]
