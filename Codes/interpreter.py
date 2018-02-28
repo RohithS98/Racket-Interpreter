@@ -1,5 +1,6 @@
 import math
 import operator as op
+from fractions import gcd
 from lexer import Tokenizer
 
 #Environment contains all Procedures and variables that are locally defined as dictionary
@@ -30,7 +31,7 @@ def std_fn():
         '+':op.add, 'modulo':op.mod, '%':op.mod, '-':op.sub, '*':op.mul, '/':op.truediv, '>':op.gt, '<':op.lt, '>=':op.ge, '<=':op.le, '=':op.eq,
         'abs': abs, 'append' : op.add, 'car': lambda x : x[0], 'cdr': lambda x : x[1:], 'equal?': op.eq,
         'length': len, 'null?': lambda x : x==[], 'cons': lambda x,y : [x]+y, 'map': map, 'expt': pow,
-        'list': lambda *x: list(x), 'drop': lambda x,y : x[y:], 'take': lambda x,y : x[:y]
+        'list': lambda *x: list(x), 'drop': lambda x,y : x[y:], 'take': lambda x,y : x[:y], 'gcd':gcd
         })
     return env
 
@@ -96,7 +97,7 @@ def evaluate(x, env=global1):
     #Procedure or variable definition
     elif op == 'define':
         if type(args[0]) == list:
-            pass
+            env.d[args[0][0]] = evaluate(["lambda", args[0][1:],args[1]],env)
         else:
             env.d[args[0]] = evaluate(args[1], env)
 
