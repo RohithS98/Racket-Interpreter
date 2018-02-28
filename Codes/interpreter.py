@@ -76,6 +76,11 @@ def evaluate(x, env=global1):
 
     #If statement
     if op == 'if':
+        if len(args) > 3:
+            raise SyntaxError("Too many arguments for if\nExpected 3, got "+str(len(args)))
+        if len(args) < 3:
+            raise SyntaxError("Too less arguments for if\nExpected 3, got "+str(len(args)))
+        
         if evaluate(args[0],env):  #Evaluates the if condition in env
             xt = args[1]
         else:
