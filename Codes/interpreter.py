@@ -123,7 +123,7 @@ while 1:
     temp = raw_input().strip()
     if temp == '':
         continue
-    temp = evaluate(Tokenizer.fulltokenize(temp))
+    temp = evaluate(Tokenizer.tokenizeparse(temp))
     #For statements which return None like define, do not print None
     if temp != None:
         print temp
