@@ -21,6 +21,15 @@ class Environment():
             raise NameError(var + ' not defined')
         else:
             return self.outer.find(var)
+        
+    def __setitem__(self, key, item):
+    	self.d[key] = item
+    
+    def __contains__(self, other):
+        if self.d:
+        	return True
+    def __getitem__(self, i):
+    	return self.d[i]
 
 #This is the standard environment that contains the functions declared at global scope
 def std_fn():
@@ -109,6 +118,42 @@ def evaluate(x, env=global1):
     #Lambda function
     elif op == 'lambda':
         return Procedure(args[0], args[1], env)
+    
+    #let feature
+    elif op == 'let':
+    	env1 = Environment( (), (), env, env)
+    	if args[0]!=[]:
+    	    for j in args[0]:
+            	env1.d[j[0]] = evaluate(j[1], env1)
+            		
+    	return evaluate(args[1], env1)
+    #and feature
+    elif op == 'or':
+    	for j in args:
+   			t = evaluate(j,env)
+   			if t:
+  				return True
+ 				break
+        return False
+        
+    #or feature
+    elif op == 'and':
+    	for j in args:
+   			t = evaluate(j,env)
+   			if t == False:
+  				return False
+ 				break
+        return evaluate(args[-1], env)
+        
+    #guarded evaluation- when feature
+    elif op == 'when':
+    	t = evaluate(args[0],env)							#evaluate the first condition
+    	if t:
+    		for j in args:
+    			temp=evaluate(j, env)
+    			if temp!= None and temp!= True and temp!= False:
+    				print temp
+    	return												#if the condition is false return
 
     #Procedure call
     else:
