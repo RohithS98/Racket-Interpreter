@@ -35,4 +35,18 @@ Valid operations:
 	(define square (lambda (s) (* s s)))
 	(define (square s) (* s s))
 	(square a) > 100
+
+7) Let* : Local binding
+	(let* ([x 2] [y (+ x 2)]) (* x y))
 	
+8) And and Or:
+	(and 1 2 3) > 3
+	(and 1 0 1) > False
+	(or 1 2 3) > True
+	(or 0 0 0 0) > False
+	
+9) When : guarded evaluation
+	(when (< 5 4) ("Error!")) > *No output*
+	(when (< 4 5) (* 4 5) (+ 4 5)) > 20
+									 9
+

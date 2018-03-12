@@ -36,7 +36,7 @@
 (agcd l2)
 (agcd (append l2 (list 10)))
 
-(let ([a 10] [b 20]) (* a b))
+(let* ([a 10] [b 20]) (* a b))
 
 (define (reply s) (cond [(equal? "hi" s) "hello!"] [(equal? "bye" s) "bye bye!"] [else "guess"]))
 
