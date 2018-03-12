@@ -127,7 +127,7 @@ def evaluate(x, env=global1):
             	env1.d[j[0]] = evaluate(j[1], env1)
             		
     	return evaluate(args[1], env1)
-    #and feature
+    #or feature
     elif op == 'or':
     	for j in args:
    			t = evaluate(j,env)
@@ -136,7 +136,7 @@ def evaluate(x, env=global1):
  				break
         return False
         
-    #or feature
+    #and feature
     elif op == 'and':
     	for j in args:
    			t = evaluate(j,env)
