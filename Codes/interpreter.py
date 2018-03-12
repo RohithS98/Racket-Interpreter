@@ -120,13 +120,14 @@ def evaluate(x, env=global1):
         return Procedure(args[0], args[1], env)
     
     #let feature
-    elif op == 'let':
-    	env1 = Environment( (), (), env, env)
+    elif op == 'let*':
+    	env1 = Environment((), (), env)
     	if args[0]!=[]:
     	    for j in args[0]:
             	env1.d[j[0]] = evaluate(j[1], env1)
             		
     	return evaluate(args[1], env1)
+    
     #or feature
     elif op == 'or':
     	for j in args:
@@ -147,13 +148,13 @@ def evaluate(x, env=global1):
         
     #guarded evaluation- when feature
     elif op == 'when':
-    	t = evaluate(args[0],env)							#evaluate the first condition
+    	t = evaluate(args[0],env)			#evaluate the first condition
     	if t:
     		for j in args:
     			temp=evaluate(j, env)
     			if temp!= None and temp!= True and temp!= False:
     				print temp
-    	return												#if the condition is false return
+    	return								#if the condition is false return
 
     #Procedure call
     else:
