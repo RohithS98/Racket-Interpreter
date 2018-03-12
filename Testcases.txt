@@ -40,6 +40,10 @@
 
 (define (reply s) (cond [(equal? "hi" s) "hello!"] [(equal? "bye" s) "bye bye!"] [else "guess"]))
 
+(reply "hi")
+(reply "bye")
+(reply "hello?")
+
 (or (equal? 1 2) (equal? 5 5))
 
 (and (equal? 7 7) (equal? (/ 9 3) 3) "done")
